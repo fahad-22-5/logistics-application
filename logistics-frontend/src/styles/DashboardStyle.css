@@ -1,0 +1,144 @@
+/* Scope everything inside .dashboard-page */
+.dashboard-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+/* Navbar */
+.dashboard-page .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.9);
+  padding: 12px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.dashboard-page .navbar-left a {
+  margin-right: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dashboard-page .navbar-left a:hover {
+  color: #00b4d8;
+}
+
+.dashboard-page .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dashboard-page .navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-page .user-info {
+  margin-right: 15px;
+  color: #ddd;
+}
+
+.dashboard-page .logout-btn {
+  background: #00b4d8;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dashboard-page .logout-btn:hover {
+  background: #0077b6;
+}
+
+/* Dashboard container */
+.dashboard-page .dashboard-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 900px;
+  width: 100%;
+  margin: 40px auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Headings */
+.dashboard-page .dashboard-container h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #00f5ff;
+  text-shadow: 0 0 10px #00f5ff66;
+}
+
+.dashboard-page .dashboard-container p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* Section titles */
+.dashboard-page .actions-section h3 {
+  margin: 30px 0 15px;
+  font-size: 1.5rem;
+  color: #f9d423;
+  text-shadow: 0 0 10px #f9d42366;
+}
+
+/* Actions Grid */
+.dashboard-page .actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Action Card */
+.dashboard-page .action-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+}
+
+.dashboard-page .action-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: #00f5ff;
+  box-shadow: 0 0 15px #00f5ff66;
+}
+
+/* Links inside cards */
+.dashboard-page .action-card a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+
+.dashboard-page .action-card a:hover {
+  color: #00f5ff;
+  text-shadow: 0 0 8px #00f5ff;
+}

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../services/AuthService';
+import '../styles/App.css'; 
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const cardRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,9 +21,20 @@ const LoginPage: React.FC = () => {
     }
   };
 
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty('--x', `${x}px`);
+    cardRef.current.style.setProperty('--y', `${y}px`);
+  };
+  
+
   return (
     <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
+      <form onSubmit={handleSubmit} ref = {cardRef} onMouseMove={handleMouseMove} className="login-form">
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <div className="form-group">

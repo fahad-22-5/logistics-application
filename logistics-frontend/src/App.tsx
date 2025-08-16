@@ -5,7 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './components/PrivateRoute';
 import Layout from './components/Layout';
-import './App.css'; 
+
 
 import ShipmentsPage from './pages/ShipmentsPage';
 import ShipmentDetailsPage from './pages/ShipmentDetailsPage';

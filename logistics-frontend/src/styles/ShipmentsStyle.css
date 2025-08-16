@@ -1,0 +1,155 @@
+/* Scoped Shipments Container */
+.shipments-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  color: #fff;
+  background: #12121c; /* dark background only for this section */
+  border-radius: 16px;
+}
+
+/* Titles */
+.shipments-container .page-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Card */
+.shipments-container .card {
+  background: #1e1e2e;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+/* Shipment Form */
+.shipments-container .shipment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.shipments-container .shipment-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #2c2c3c;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.shipments-container .shipment-form input:focus {
+  border-color: #4cafef;
+  outline: none;
+  background: #33334d;
+}
+
+/* Shipments Table */
+.shipments-container .styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #1c1c2a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.shipments-container .styled-table th,
+.shipments-container .styled-table td {
+  padding: 12px 15px;
+  text-align: left;
+  color: #ddd;
+}
+
+.shipments-container .styled-table thead {
+  background: #2a2a3a;
+  color: #fff;
+}
+
+.shipments-container .styled-table tr {
+  transition: background 0.3s ease;
+}
+
+.shipments-container .styled-table tr:nth-child(even) {
+  background: #242433;
+}
+
+.shipments-container .styled-table tr:hover {
+  background: #2f2f47;
+}
+
+/* View Button */
+.shipments-container .view-button {
+  padding: 6px 12px;
+  background: #4cafef;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.shipments-container .view-button:hover {
+  background: #3a9bdc;
+}
+
+/* Status Badges */
+.shipments-container .status-badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.shipments-container .status-badge.pending {
+  background: #ff9800;
+  color: #fff;
+}
+
+.shipments-container .status-badge.delivered {
+  background: #4caf50;
+  color: #fff;
+}
+
+.shipments-container .status-badge.cancelled {
+  background: #f44336;
+  color: #fff;
+}
+
+.shipments-container .status-badge.in_transit {
+  background: #3f51b5; /* Indigo/blue */
+  color: #fff;
+}
+
+/* Error Message */
+.shipments-container .error-message {
+  background: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.shipments-container .comic-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}

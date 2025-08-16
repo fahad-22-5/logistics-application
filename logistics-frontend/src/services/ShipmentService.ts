@@ -8,6 +8,24 @@ export const getShipments = (token: string) => {
   });
 };
 
+export const getShipmentLocation = (token: string) => {
+  return api.get('/api/getShipmentCoordinates', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getShipmentMapData = (token: string, id: string) => {
+  return api.get(`/api/getShipmentCoordinatesById/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
 export const createShipment = (token: string, shipmentData: any) => {
   return api.post('/api/shipments', shipmentData, {
     headers: {

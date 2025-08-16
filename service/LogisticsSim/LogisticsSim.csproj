@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-LogisticsSim-77997dfa-8858-4fd2-969d-7b8e550e5b3f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.6.3" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.0" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
+  </ItemGroup>
+</Project>

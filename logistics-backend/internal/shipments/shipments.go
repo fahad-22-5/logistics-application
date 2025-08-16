@@ -214,3 +214,156 @@ func GetShipmentData(c *gin.Context) {
 
 	c.JSON(http.StatusOK, shipments)
 }
+
+func GetShipmentCoordinates(c *gin.Context) {
+	role := c.GetString("role")
+
+	var rows *sql.Rows
+	var err error
+
+	// Adjust query based on role
+	if role == "customer" {
+		rows, err = database.DB.Query(`
+			SELECT shipment_id AS id, tracking_number, lat, lng
+			FROM (
+				SELECT 
+					se.shipment_id,
+					s.tracking_number,
+					se.latitude AS lat,
+					se.longitude AS lng,
+					ROW_NUMBER() OVER (PARTITION BY se.shipment_id ORDER BY se.timestamp DESC) AS rn
+				FROM shipment_events se
+				LEFT JOIN shipments s ON s.id = se.shipment_id
+			) t
+			WHERE rn = 1
+			ORDER BY shipment_id;`)
+	} else {
+		rows, err = database.DB.Query(`
+			SELECT shipment_id AS id, tracking_number, lat, lng
+			FROM (
+				SELECT 
+					se.shipment_id,
+					s.tracking_number,
+					se.latitude AS lat,
+					se.longitude AS lng,
+					ROW_NUMBER() OVER (PARTITION BY se.shipment_id ORDER BY se.timestamp DESC) AS rn
+				FROM shipment_events se
+				LEFT JOIN shipments s ON s.id = se.shipment_id
+			) t
+			WHERE rn = 1
+			ORDER BY shipment_id;`)
+	}
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch shipment coordinates"})
+		return
+	}
+	defer rows.Close()
+
+	// Response struct
+	type ShipmentCoordinate struct {
+		ID             int     `json:"id"`
+		TrackingNumber string  `json:"tracking_number"`
+		Lat            float64 `json:"lat"`
+		Lng            float64 `json:"lng"`
+	}
+
+	var shipments []ShipmentCoordinate
+
+	for rows.Next() {
+		var s ShipmentCoordinate
+		if err := rows.Scan(&s.ID, &s.TrackingNumber, &s.Lat, &s.Lng); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse shipment coordinates"})
+			return
+		}
+		shipments = append(shipments, s)
+	}
+
+	c.JSON(http.StatusOK, shipments)
+}
+
+func GetShipmentCoordinatesByShipmentID(c *gin.Context) {
+	role := c.GetString("role")
+	id := c.Param("id") // shipment_id from URL
+
+	var rows *sql.Rows
+	var err error
+
+	query := `
+		SELECT 
+			shipment_id AS id, 
+			tracking_number, 
+			lat, 
+			lng, 
+			destination_latitude, 
+			destination_longitude, 
+			warehouse_latitude, 
+			warehouse_longitude
+		FROM (
+			SELECT 
+				se.shipment_id,
+				s.tracking_number,
+				se.latitude AS lat,
+				se.longitude AS lng,
+				s.destination_latitude, 
+				s.destination_longitude,
+				w.latitude AS warehouse_latitude,
+				w.longitude AS warehouse_longitude,
+				ROW_NUMBER() OVER (PARTITION BY se.shipment_id ORDER BY se.timestamp DESC) AS rn
+			FROM shipment_events se
+			LEFT JOIN shipments s ON s.id = se.shipment_id
+			LEFT JOIN warehouses w ON w.id = s.origin_warehouse_id
+		) t
+		WHERE shipment_id = ? AND rn = 1;
+	`
+
+	// Adjust based on role (customers should only see their own shipment)
+	if role == "customer" {
+		userID := c.GetInt("user_id")
+		rows, err = database.DB.Query(query+`
+			AND EXISTS (SELECT 1 FROM shipments WHERE id = ? AND customer_id = ?)`,
+			id, id, userID)
+	} else {
+		rows, err = database.DB.Query(query, id)
+	}
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch shipment coordinates"})
+		return
+	}
+	defer rows.Close()
+
+	// Response struct
+	type ShipmentCoordinate struct {
+		ID                   int     `json:"id"`
+		TrackingNumber       string  `json:"tracking_number"`
+		Lat                  float64 `json:"lat"`
+		Lng                  float64 `json:"lng"`
+		DestinationLatitude  float64 `json:"destination_latitude"`
+		DestinationLongitude float64 `json:"destination_longitude"`
+		WarehouseLatitude    float64 `json:"warehouse_latitude"`
+		WarehouseLongitude   float64 `json:"warehouse_longitude"`
+	}
+
+	var shipments []ShipmentCoordinate
+
+	for rows.Next() {
+		var s ShipmentCoordinate
+		if err := rows.Scan(
+			&s.ID,
+			&s.TrackingNumber,
+			&s.Lat,
+			&s.Lng,
+			&s.DestinationLatitude,
+			&s.DestinationLongitude,
+			&s.WarehouseLatitude,
+			&s.WarehouseLongitude,
+		); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse shipment coordinates"})
+			return
+		}
+		shipments = append(shipments, s)
+	}
+
+	c.JSON(http.StatusOK, shipments)
+}
