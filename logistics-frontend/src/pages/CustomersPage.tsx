@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCustomers } from '../services/CustomerService';
 import type { Customer } from '../models/Customer';
+import '../styles/CustomersPage.css'
 
 const CustomersPage: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -22,11 +23,11 @@ const CustomersPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="customers-page">
       <h2>Customers</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
+      {error && <div className="alert">{error}</div>}
 
-      <table className="table">
+      <table>
         <thead>
           <tr>
             <th>ID</th>

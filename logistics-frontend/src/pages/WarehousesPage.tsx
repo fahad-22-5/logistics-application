@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getWarehouses } from '../services/WarehouseService';
 import type { Warehouse } from '../models/Warehouse';
-
+import '../styles/WarehousesPage.css'
 const WarehousesPage: React.FC = () => {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +22,7 @@ const WarehousesPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="warehouses-page">
       <h2>Warehouses</h2>
       {error && <div className="alert alert-danger">{error}</div>}
 

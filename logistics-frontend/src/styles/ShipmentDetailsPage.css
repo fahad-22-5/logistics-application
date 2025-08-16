@@ -1,0 +1,72 @@
+@import "leaflet/dist/leaflet.css";
+.shipment-details-container {
+  background: rgba(20, 20, 35, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.15);
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  color: #f1f1f1;
+  font-family: "Inter", sans-serif;
+}
+
+.shipment-details-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  color: #00c8ff;
+  text-align: center;
+}
+
+.shipment-details-container p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.shipment-details-container strong {
+  color: #fff;
+}
+
+.update-status-section {
+  margin-top: 2rem;
+}
+
+.update-status-section h3 {
+  font-size: 1.4rem;
+  color: #00c8ff;
+  margin-bottom: 1rem;
+}
+
+.update-status-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.update-status-input:focus {
+  border: 1px solid #00c8ff;
+  box-shadow: 0 0 8px rgba(0, 200, 255, 0.4);
+  outline: none;
+}
+
+.update-status-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #00c8ff, #0078ff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.update-status-btn:hover {
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
+  transform: translateY(-2px);
+}

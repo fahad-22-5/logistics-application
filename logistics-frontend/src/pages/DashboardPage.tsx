@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import type { User } from '../models/User';
 import { getMe } from '../services/AuthService';
+import '../styles/DashboardStyle.css';
 
 const DashboardPage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -26,46 +27,65 @@ const DashboardPage: React.FC = () => {
     fetchUser();
   }, [navigate]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   if (!user) {
     return <div>Loading dashboard...</div>;
   }
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <p>Welcome, {user.name}!</p>
-      <p>Your role is: {user.role}</p>
-
-      {user.role === 'manager' && (
-        <div className="mt-4">
-          <h3>Manager Actions</h3>
-          <ul className="list-group">
-            <li className="list-group-item"><Link to="/shipments">Manage Shipments</Link></li>
-            <li className="list-group-item"><Link to="/customers">View Customers</Link></li>
-            <li className="list-group-item"><Link to="/drivers">View Drivers</Link></li>
-            <li className="list-group-item"><Link to="/warehouses">View Warehouses</Link></li>
-          </ul>
+    <div className="dashboard-page">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-left">
+          <Link to="/" className="logo">🚚 Logistics Co.</Link>
         </div>
-      )}
-
-      {user.role === 'driver' && (
-        <div className="mt-4">
-          <h3>Driver Actions</h3>
-          <ul className="list-group">
-            <li className="list-group-item"><Link to="/shipments">View Assigned Shipments</Link></li>
-            <li className="list-group-item"><Link to="/warehouses">View Warehouses</Link></li>
-          </ul>
+        <div className="navbar-right">
+          <span className="user-info">Hi, {user.name}</span>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </div>
-      )}
+      </nav>
 
-      {user.role === 'customer' && (
-        <div className="mt-4">
-          <h3>Customer Actions</h3>
-          <ul className="list-group">
-            <li className="list-group-item"><Link to="/shipments">View My Shipments</Link></li>
-          </ul>
-        </div>
-      )}
+      {/* Dashboard Content */}
+      <div className="dashboard-container">
+        <h2>Dashboard</h2>
+        <p>Welcome, {user.name}!</p>
+        <p>Your role is: {user.role}</p>
+
+        {user.role === 'manager' && (
+          <div className="actions-section">
+            <h3>Manager Actions</h3>
+            <div className="actions-grid">
+              <div className="action-card"><Link to="/shipments">Manage Shipments</Link></div>
+              <div className="action-card"><Link to="/customers">View Customers</Link></div>
+              <div className="action-card"><Link to="/drivers">View Drivers</Link></div>
+              <div className="action-card"><Link to="/warehouses">View Warehouses</Link></div>
+            </div>
+          </div>
+        )}
+
+        {user.role === 'driver' && (
+          <div className="actions-section">
+            <h3>Driver Actions</h3>
+            <div className="actions-grid">
+              <div className="action-card"><Link to="/shipments">View Assigned Shipments</Link></div>
+              <div className="action-card"><Link to="/warehouses">View Warehouses</Link></div>
+            </div>
+          </div>
+        )}
+
+        {user.role === 'customer' && (
+          <div className="actions-section">
+            <h3>Customer Actions</h3>
+            <div className="actions-grid">
+              <div className="action-card"><Link to="/shipments">View My Shipments</Link></div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

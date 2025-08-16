@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getDrivers } from '../services/DriverService';
 import type { Driver } from '../models/Driver';
+import '../styles/DriversPage.css'; // Assuming you have a CSS file for styling'
 
 const DriversPage: React.FC = () => {
   const [drivers, setDrivers] = useState<Driver[]>([]);
@@ -22,7 +23,7 @@ const DriversPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="drivers-page">
       <h2>Drivers</h2>
       {error && <div className="alert alert-danger">{error}</div>}
 

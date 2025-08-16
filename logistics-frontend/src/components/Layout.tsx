@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../styles/App.css'
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,8 +15,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="app-container">
-      <div className="sidebar">
+    <div className="app-background">
+      {/* <div className="sidebar">
         <h1 className="logo">Logistics Co.</h1>
         <nav className="nav-menu">
           <Link to="/dashboard">Dashboard</Link>
@@ -25,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Link to="/warehouses">Warehouses</Link>
         </nav>
         <button className="btn btn-logout" onClick={handleLogout}>Logout</button>
-      </div>
+      </div> */}
       <main className="content">
         {children}
       </main>

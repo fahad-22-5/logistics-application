@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { register } from '../services/AuthService';
 import { Link } from 'react-router-dom';
+import '../styles/App.css'; 
 
 const RegisterPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -9,6 +10,8 @@ const RegisterPage: React.FC = () => {
   const [role, setRole] = useState('customer');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const cardRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,9 +25,23 @@ const RegisterPage: React.FC = () => {
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty('--x', `${x}px`);
+    cardRef.current.style.setProperty('--y', `${y}px`);
+  };
+
   return (
     <div className="register-container">
-      <form onSubmit={handleSubmit} className="register-form">
+      <form
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onSubmit={handleSubmit}
+        className="register-form"
+      >
         <h2>Register</h2>
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}

@@ -22,7 +22,10 @@ func main() {
 
 	// CORS middleware
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5173"}
+	config.AllowOrigins = []string{
+		"http://localhost:5173",
+		"http://192.168.1.14:5173",
+	}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	r.Use(cors.New(config))
@@ -43,7 +46,8 @@ func main() {
 		api.PUT("/shipments/:id/assign", middleware.AuthMiddleware("manager"), shipments.AssignShipmentToCourier)
 		api.GET("/me", middleware.AuthMiddleware(), auth.GetUserDetails)
 		api.GET("/getShipments/:id", middleware.AuthMiddleware("customer", "manager", "driver"), shipments.GetShipmentData)
-
+		api.GET("/getShipmentCoordinates", middleware.AuthMiddleware("customer", "manager", "driver"), shipments.GetShipmentCoordinates)
+		api.GET("/getShipmentCoordinatesById/:id", middleware.AuthMiddleware("customer", "manager", "driver"), shipments.GetShipmentCoordinatesByShipmentID)
 	}
 
 	// for _, ri := range r.Routes() {

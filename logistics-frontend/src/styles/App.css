@@ -1,0 +1,316 @@
+/* LoginPage.css */
+@import "leaflet/dist/leaflet.css";
+.app-background {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* dark gradient */
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* dark gradient */
+  height: 100vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+/* Container for centering */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Card style */
+.login-form {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 60px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #fff;
+  z-index: 0;
+}
+
+
+.login-form::before {
+  content: "";
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(79, 172, 254, 0.3), transparent 40%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 0; /* Behind the form */
+}
+
+/* Show glow on hover */
+.login-form:hover::before {
+  opacity: 1;
+  z-index: 0;
+}
+
+/* Heading */
+.login-form h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Error message */
+.error-message {
+  color: #ff6b6b;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  outline: none;
+  z-index: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: text;
+  z-index: 1;
+}
+
+.form-group input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  /* border: 1px solid #4facfe; */
+}
+
+/* Button */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* Register link */
+.switch-form {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.switch-form a {
+  color: #4facfe;
+  text-decoration: none;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Container */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background: #121212; */
+  overflow: hidden;
+}
+
+/* Glowing card effect */
+.register-form {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  width: 350px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.register-form::before {
+  content: '';
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 123, 255, 0.4), transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.register-form:hover::before {
+  opacity: 1;
+}
+
+.register-form * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Title */
+.register-form h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+/* Inputs & select (same look) */
+.register-form input,
+.register-form select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+
+  /* Smooth transition */
+  transition: background 0.3s ease;
+}
+
+/* Custom dropdown arrow */
+.register-form select {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+/* Match hover/focus with inputs */
+.register-form input:focus,
+.register-form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
+.register-form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Dropdown options (dark theme) */
+.register-form select option {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 12px;
+}
+/* When hovering over options (modern browsers only) */
+.register-form select option:hover {
+  background: #007bff;      /* Same blue accent as button */
+  color: #fff;
+}
+
+/* When selected */
+.register-form select option:checked {
+  background: #0056b3;      /* Darker blue for selected */
+  color: #fff;
+}
+/* Button */
+.register-form .btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+   background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.register-form .btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Messages */
+.error-message {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+/* Switch form text */
+.switch-form {
+  margin-top: 15px;
+  color: #bbb;
+}
+
+.switch-form a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
+}
